@@ -9,15 +9,14 @@ import java.util.regex.Pattern;
 
 public class RegexText {
     public static void main(String[] args) throws IOException {
-        Pattern pattern = Pattern.compile("\\d+-\\d+-\\d+\\s(?:\\d+:){2}\\d+.(\\d+)");
-        List<String> list = Files.readAllLines(new File("springBootLog").toPath());
+        Pattern pattern = Pattern.compile("\\s+(\\w+)\\s+(\\w*?)\\s*(\\w+)\\s+(\\d+K)");
+        List<String> list = Files.readAllLines(new File("gcLog").toPath());
         list.stream().forEach(s -> {
             Matcher matcher = pattern.matcher(s);
-            if (matcher.find()){
-                System.out.println(matcher.group(1));
+            if (matcher.find()) {
+                System.out.println(matcher.group(1) + matcher.group(2) + "_"
+                        + matcher.group(3) + ":" + matcher.group(4));
             }
         });
-
-
     }
 }
